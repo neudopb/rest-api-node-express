@@ -8,19 +8,25 @@ router.get('/posts', async function (req, res) {
 });
 
 router.get('/posts/:id', async function (req, res) {
-
+    const post = await postsService.getPost(req.params.id);
+    res.json(post);
 });
 
 router.post('/posts', async function (req, res) {
-
+    const post = req.body;
+    const newPost = await postsService.savePost(post);
+    res.json(newPost);
 });
 
 router.put('/posts/:id', async function (req, res) {
-
+    const post = req.body;
+    await postsService.updatePost(req.params.id, post);
+    res.end();
 });
 
 router.delete('/posts/:id', async function (req, res) {
-
+    await postsService.deletePost(req.params.id);
+    res.end();
 });
 
 module.exports = router;
